@@ -12,7 +12,7 @@ export default {
     },
 
     setVolume: (value,onVolumeChangeNotification) => {
-        onVolumeChangeNotifcation = onVolumeChangeNotifcation || true;
+        onVolumeChangeNotification = (typeof onVolumeChangeNotification == "undefined") ? true : false;
 
         if(Platform.OS == 'ios'){
             RNVolume.setVolume(parseFloat(value));
