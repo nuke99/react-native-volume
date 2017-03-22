@@ -11,13 +11,15 @@ export default {
        RNVolume.getVolume(callback);
     },
 
-    setVolume: (value) => {
+    setVolume: (value,onVolumeChangeNotification) => {
+        onVolumeChangeNotifcation = onVolumeChangeNotifcation || true;
+
         if(Platform.OS == 'ios'){
             RNVolume.setVolume(parseFloat(value));
         }
 
         else if (Platform.OS == 'android'){
-            RNVolume.setVolume(parseFloat(value * ANDROIDMAXVALUE));
+            RNVolume.setVolume(parseFloat(value * ANDROIDMAXVALUE),onVolumeChangeNotification);
 
         }
         //iOS

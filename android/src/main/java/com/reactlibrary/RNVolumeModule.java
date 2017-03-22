@@ -18,6 +18,7 @@ public class RNVolumeModule extends ReactContextBaseJavaModule{
     private static final String TAG = "Volume";
     private AudioManager audio;
     public ReactContext mReactContext;
+    public boolean willNotify = true; 
     private DeviceEventManagerModule.RCTDeviceEventEmitter mJSModule = null;
 
     public RNVolumeModule(ReactApplicationContext reactContext) {
@@ -38,14 +39,6 @@ public class RNVolumeModule extends ReactContextBaseJavaModule{
     }
 
     @ReactMethod
-    public void onVolumeChange() {
-        if (mJSModule == null) {
-            mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
-        }
-        mJSModule.emit("onVolumeChange", "123123123123");
-    }
-
-    @ReactMethod
     public void getVolume(Callback callback) {
         int currentVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxVolume = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -54,7 +47,8 @@ public class RNVolumeModule extends ReactContextBaseJavaModule{
     }
 
     @ReactMethod
-    public void setVolume(int value) {
+    public void setVolume(int value,boolean onVolumeChangeNotify) {
+         this.willNotify = onVolumeChangeNotify;
          audio.setStreamVolume(AudioManager.STREAM_MUSIC,value,0);
     }
 
@@ -83,7 +77,11 @@ public class RNVolumeModule extends ReactContextBaseJavaModule{
                         if (mJSModule == null) {
                             mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
                         }
-                        mJSModule.emit("onVolumeChange",currentVolume/maxVolume);
+                        
+                        if(willNotify == true){
+                            mJSModule.emit("onVolumeChange",currentVolume/maxVolume);
+                        }
+                        willNotify = true;
             }
 
         }
