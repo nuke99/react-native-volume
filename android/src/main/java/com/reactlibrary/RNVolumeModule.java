@@ -49,7 +49,7 @@ public class RNVolumeModule extends ReactContextBaseJavaModule{
     public void getVolume(Callback callback) {
         int currentVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxVolume = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        callback.invoke(null, ((float) currentVolume / maxVolume));
+        callback.invoke(((float) currentVolume / maxVolume));
         //callback.invoke(null,((String) "Hello"));
     }
 
@@ -83,7 +83,7 @@ public class RNVolumeModule extends ReactContextBaseJavaModule{
                         if (mJSModule == null) {
                             mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
                         }
-                        mJSModule.emit("onVolumeChange", String.valueOf(currentVolume/maxVolume));
+                        mJSModule.emit("onVolumeChange",currentVolume/maxVolume);
             }
 
         }
