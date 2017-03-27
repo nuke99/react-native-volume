@@ -18,7 +18,7 @@
 
 -(void)hello;
 -(void)getVolume;
--(void)setVolume:(float)volume :(bool)onVolumeChangeNotification;
+-(void)setVolume:(float)volume :(BOOL *)onVolumeChangeNotification;
 
 
 @end

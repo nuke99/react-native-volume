@@ -28,7 +28,8 @@ RCT_EXPORT_METHOD(getVolume: (RCTResponseSenderBlock)callback){
     
 }
 
-RCT_EXPORT_METHOD(setVolume:(float)volume :(bool)onVolumeChangeNotification) {
+RCT_EXPORT_METHOD(setVolume:(float)volume :(BOOL *)onVolumeChangeNotification) {
+    
     self.onVolumeChangeNotification = onVolumeChangeNotification;
     [self nsetVolume:volume];
 }
