@@ -70,6 +70,7 @@ RCT_EXPORT_METHOD(acivateListner) {
         [self sendEventWithName:@"onVolumeChange" body:[NSNumber numberWithFloat:vol]];
     }
     
+    self.onVolumeChangeNotification = true;
 }
 
 @end
