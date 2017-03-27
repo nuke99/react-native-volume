@@ -15,7 +15,7 @@
 @interface RNVolume : RCTEventEmitter <RCTBridgeModule>
 -(void)hello;
 -(void)getVolume;
--(void)setVolume:(float *)volume;
+-(void)setVolume:(float)volume :(bool)onVolumeChangeNotification;
 
 @property (nonatomic) onVolumeChangeNotification;
 @end
