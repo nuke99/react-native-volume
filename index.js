@@ -15,7 +15,7 @@ export default {
         onVolumeChangeNotification = (typeof onVolumeChangeNotification == "undefined") ? true : false;
 
         if(Platform.OS == 'ios'){
-            RNVolume.setVolume(parseFloat(value));
+            RNVolume.setVolume(parseFloat(value),onVolumeChangeNotification);
         }
 
         else if (Platform.OS == 'android'){

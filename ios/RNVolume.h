@@ -16,5 +16,7 @@
 -(void)hello;
 -(void)getVolume;
 -(void)setVolume:(float *)volume;
+
+@property (nonatomic) onVolumeChangeNotification;
 @end
   

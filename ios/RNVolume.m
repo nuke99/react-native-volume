@@ -2,7 +2,7 @@
 #import "RNVolume.h"
 
 @implementation RNVolume
-
+@synthesize onVolumeChangeNotification;
 - (dispatch_queue_t)methodQueue
 {
     return dispatch_get_main_queue();
@@ -28,8 +28,8 @@ RCT_EXPORT_METHOD(getVolume: (RCTResponseSenderBlock)callback){
     
 }
 
-RCT_EXPORT_METHOD(setVolume:(float)volume) {
-    
+RCT_EXPORT_METHOD(setVolume:(float)volume :(bool)onVolumeChangeNotification) {
+    self.onVolumeChangeNotification = onVolumeChangeNotification;
     [self nsetVolume:volume];
 }
 
@@ -63,9 +63,11 @@ RCT_EXPORT_METHOD(acivateListner) {
 
 - (void)volumeChanged:(NSNotification *)notification
 {
-    float vol = [self ngetVolume];
-    [self sendEventWithName:@"onVolumeChange" body:[NSNumber numberWithFloat:vol]];
-
+    
+    if(self.onVolumeChangeNotification == true) {
+        float vol = [self ngetVolume];
+        [self sendEventWithName:@"onVolumeChange" body:[NSNumber numberWithFloat:vol]];
+    }
     
 }
 
