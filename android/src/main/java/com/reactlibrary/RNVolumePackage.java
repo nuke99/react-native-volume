@@ -16,7 +16,8 @@ public class RNVolumePackage implements ReactPackage {
       return Arrays.<NativeModule>asList(new RNVolumeModule(reactContext));
     }
 
-    @Override
+    //As of RN 47.2, this method is no longer in the interface.  Keeping here to be backwards compatible.
+    //https://github.com/facebook/react-native/commit/ce6fb337a146e6f261f2afb564aa19363774a7a8
     public List<Class<? extends JavaScriptModule>> createJSModules() {
       return Collections.emptyList();
     }
